@@ -4,7 +4,7 @@ A Jupyter notebook implementation comparing **Classical** and **Quantum Physics-
 
 ---
 
-## 📖 Overview
+## Overview
 
 This project explores the application of hybrid quantum-classical neural networks to physics-informed machine learning. It implements and compares different neural network architectures for solving fluid dynamics problems governed by the Navier–Stokes equations.
 
@@ -18,7 +18,7 @@ This project explores the application of hybrid quantum-classical neural network
 
 ---
 
-## 🔬 Problem Description
+## Problem Description
 
 ### Cylinder Wake Dataset
 
@@ -69,7 +69,7 @@ Laminar vortex shedding (von Kármán street)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Classical PINN
 
@@ -112,7 +112,7 @@ The quantum layer uses **StronglyEntanglingLayers** from PennyLane, which applie
 
 ---
 
-## 📊 Physics-Informed Loss Function
+## Physics-Informed Loss Function
 
 The PINN loss combines data fidelity with PDE residuals:
 
@@ -142,7 +142,33 @@ $$T_{\text{PINN}} = O\Big(28B \cdot C_{\text{forward}} \Big)$$
 
 ---
 
-## 🛠️ Dependencies
+## JAX Implementation Details
+
+The project leverages **JAX** for high-performance numerical computing and machine learning research. Key features utilized include:
+
+- **Automatic Differentiation (`grad`, `value_and_grad`)**: Used to compute exact gradients of the neural networks and the physics residuals (PDE derivatives) with respect to input coordinates and model parameters. This allows for essentially exact evaluation of differential operators in the loss function.
+- **Just-In-Time Compilation (`jit`)**: Critical functions, including the physics-based loss function and the optimization update step, are compiled using XLA (Accelerated Linear Algebra). This significantly speeds up the training loop and residual evaluation.
+- **Vectorization (`vmap`)**: JAX's vectorization map is employed to efficiently process batches of spatio-temporal points without explicit loops, enabling efficient residual computation across the grid.
+- **Optimization Ecosystem**: The implementation integrates **Optax** for gradient-based optimization (Adam) and leverages JAX's interoperability with **SciPy**'s `minimize` (L-BFGS-B) for fine-tuning the model parameters.
+
+---
+
+## Performance Benchmarks
+
+The following metrics were recorded for the cylinder wake flow problem (Re=100) after training the different architectures.
+
+| Model | Parameters | Training Time (s) | Final Loss | L_data | L_pde |
+|-------|------------|-------------------|------------|--------|-------|
+| Classical PINN (8 layers) | 4,078 | 71.46 | 2.38e-03 | 1.22e-03 | 1.16e-03 |
+| Classical PINN (5 layers) | 2,128 | 43.88 | 3.35e-03 | 1.81e-03 | 1.54e-03 |
+| Quantum PINN (Improved) | 311 | 372.27 | 2.89e-02 | 2.20e-02 | 6.83e-03 |
+| Quantum PINN (Original) | 79 | 327.90 | 1.03e-01 | 1.00e-01 | 2.35e-03 |
+
+*Note: Training times and losses may vary based on hardware and random initialization. The metrics above represent a single training run.*
+
+---
+
+## Dependencies
 
 ```python
 numpy
@@ -162,7 +188,7 @@ pip install numpy jax jaxlib pennylane optax matplotlib scipy
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 qpinn/
@@ -174,7 +200,7 @@ qpinn/
 
 ---
 
-## 🚀 Usage
+## Usage
 
 1. **Clone the repository:**
    ```bash
@@ -197,7 +223,7 @@ qpinn/
 
 ---
 
-## 📈 Key Functions
+## Key Functions
 
 ### Data Loading & Preprocessing
 - `load_cylinder_wake()` - Load the .mat dataset
@@ -226,7 +252,7 @@ qpinn/
 
 ---
 
-## 📚 References
+## References
 
 1. **Original PINN Paper:**
    > Raissi, M., Perdikaris, P., & Karniadakis, G. E. (2019). *Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations.* Journal of Computational Physics, 378, 686-707.
@@ -239,18 +265,26 @@ qpinn/
 
 ---
 
-## 📝 License
+## License
 
-This project is provided for educational and research purposes.
+MIT License
 
----
+Copyright (c) 2025
 
-## 👨‍💻 Author
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-[Your Name]
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
