@@ -200,29 +200,6 @@ qpinn/
 
 ---
 
-## Usage
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/geet/qpinn.git
-   cd qpinn
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Download the dataset:**
-   Place `cylinder_wake.mat` in the `data/` directory. The dataset can be obtained from [Raissi's PINN repository](https://github.com/maziarraissi/PINNs).
-
-4. **Run the notebook:**
-   ```bash
-   jupyter notebook qpinn.ipynb
-   ```
-
----
-
 ## Key Functions
 
 ### Data Loading & Preprocessing
