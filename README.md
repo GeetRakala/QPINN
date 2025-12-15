@@ -1,6 +1,6 @@
 # QPINN: Quantum Physics-Informed Neural Networks
 
-A Jupyter notebook implementation comparing **Classical** and **Quantum Physics-Informed Neural Networks (PINNs)** for solving the 2D incompressible Navier–Stokes equations using the cylinder wake benchmark dataset.
+A Jupyter notebook (qpinn.ipynb) implementation comparing **Classical** and **Quantum Physics-Informed Neural Networks (PINNs)** for solving the 2D incompressible Navier–Stokes equations using the cylinder wake benchmark dataset.
 
 ---
 
