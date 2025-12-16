@@ -1,5 +1,10 @@
 # QPINN: Quantum Physics-Informed Neural Networks
 
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![JAX](https://img.shields.io/badge/JAX-Powered-9cf)
+![PennyLane](https://img.shields.io/badge/PennyLane-Quantum-CDDC39)
+
 Implementation and comparison of classical and quantum physics-informed neural networks for solving the 2D incompressible Navier-Stokes equations. Uses the cylinder wake benchmark dataset from Raissi et al. (2019).
 
 ## Overview
