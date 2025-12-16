@@ -80,6 +80,7 @@ The loss function combines data fidelity with PDE residual minimization:
 $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{data}} + \mathcal{L}_{\text{PDE}}$$
 
 **Data loss:**
+
 $$\mathcal{L}_{\text{data}} = \text{MSE}(u_{\text{pred}}, u_{\text{true}}) + \text{MSE}(v_{\text{pred}}, v_{\text{true}}) + \text{MSE}(p_{\text{pred}}, p_{\text{true}})$$
 
 **PDE residual loss:**
